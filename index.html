@@ -1,0 +1,718 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>LPU | Official Document Processing Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            background: #f0f4f8;
+            min-height: 100vh;
+        }
+
+        /* Import Google Fonts for modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700;800&display=swap');
+
+        /* LPU Official Color Theme */
+        :root {
+            --lpu-primary: #1a3d7c;
+            --lpu-secondary: #f5a623;
+            --lpu-accent: #2c5f8a;
+            --lpu-gold: #d4af37;
+            --lpu-light-bg: #ffffff;
+            --lpu-gray-light: #f8fafc;
+            --lpu-border: #e2e8f0;
+            --lpu-text-dark: #0f172a;
+            --lpu-text-muted: #475569;
+            --success-green: #10b981;
+            --error-red: #ef4444;
+        }
+
+        /* Stylish Header with Real LPU Identity */
+        .top-bar {
+            background: var(--lpu-primary);
+            padding: 0.5rem 2rem;
+            color: white;
+            font-size: 0.8rem;
+            text-align: right;
+            border-bottom: 2px solid var(--lpu-gold);
+        }
+
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 0.8rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--lpu-border);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        /* Big, Impressive LPU Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(145deg, var(--lpu-primary), #0f2b4f);
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 28px;
+            color: var(--lpu-gold);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--lpu-primary);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            color: var(--lpu-text-muted);
+            letter-spacing: 1px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--lpu-text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            color: var(--lpu-secondary);
+            border-bottom-color: var(--lpu-gold);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1280px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section - Institutional Pride */
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #fef9e6 100%);
+            border-radius: 32px;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(26, 61, 124, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "LPU";
+            font-size: 120px;
+            font-weight: 800;
+            color: rgba(26, 61, 124, 0.03);
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--lpu-primary), var(--lpu-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: var(--lpu-text-muted);
+            max-width: 650px;
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--lpu-secondary);
+            color: #1e293b;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Upload Card - Premium Glassmorphism */
+        .upload-card {
+            background: var(--lpu-light-bg);
+            border-radius: 32px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            background: #fafcff;
+        }
+
+        .upload-area:hover {
+            border-color: var(--lpu-primary);
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -12px rgba(26, 61, 124, 0.15);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--success-green);
+            background: #ecfdf5;
+        }
+
+        .upload-icon {
+            font-size: 72px;
+            margin-bottom: 1rem;
+        }
+
+        .upload-text {
+            font-size: 1.3rem;
+            color: var(--lpu-text-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            color: var(--lpu-text-muted);
+            font-size: 0.85rem;
+        }
+
+        .file-info {
+            background: #eef2ff;
+            padding: 1rem 1.5rem;
+            border-radius: 18px;
+            margin-top: 1.5rem;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-left: 4px solid var(--lpu-primary);
+        }
+
+        .file-info.show {
+            display: flex;
+        }
+
+        .file-name {
+            font-weight: 600;
+            color: var(--lpu-primary);
+            word-break: break-all;
+        }
+
+        .remove-file {
+            background: var(--error-red);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .remove-file:hover {
+            background: #b91c1c;
+            transform: scale(0.96);
+        }
+
+        .process-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(95deg, var(--lpu-primary) 0%, #2c5282 100%);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(26, 61, 124, 0.3);
+        }
+
+        .process-btn:hover:not(:disabled) {
+            background: linear-gradient(95deg, #0f2f60, var(--lpu-primary));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(26, 61, 124, 0.4);
+        }
+
+        .process-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading - Institutional spin */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background: var(--lpu-gray-light);
+            border-radius: 24px;
+            margin: 1.5rem 0;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border: 5px solid #e2e8f0;
+            border-top: 5px solid var(--lpu-primary);
+            border-right: 5px solid var(--lpu-gold);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Message - Elegant */
+        .submission-message {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2rem;
+            display: none;
+            text-align: center;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+            border: 1px solid #e2f0e8;
+        }
+
+        .submission-message.show {
+            display: block;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-icon {
+            font-size: 70px;
+            margin-bottom: 1rem;
+        }
+
+        .submission-message h3 {
+            color: #0b3b2f;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .submission-message p {
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+        }
+
+        .new-submission-btn {
+            background: var(--success-green);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(16,185,129,0.3);
+        }
+
+        .new-submission-btn:hover {
+            background: #059669;
+            transform: scale(1.02);
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 18px;
+            margin-top: 1rem;
+            display: none;
+            font-weight: 500;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 5px solid var(--success-green);
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 5px solid var(--error-red);
+        }
+
+        /* Footer - Official */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #5b6e8c;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--lpu-border);
+            margin-top: 2.5rem;
+            background: white;
+            border-radius: 24px 24px 0 0;
+        }
+
+        .privacy-note {
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 0.9rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--lpu-text-muted);
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+            .logo-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 22px;
+            }
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .hero {
+                padding: 1.8rem;
+            }
+            .upload-card {
+                padding: 1.5rem;
+            }
+            .upload-area {
+                padding: 1.8rem;
+            }
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Official LPU Top Header -->
+    <div class="top-bar">
+        🔐 Lovely Professional University | Official Document Processing Cell | Phagwara, Punjab
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">LPU</div>
+                <div class="logo-text">
+                    <h1>LOVELY PROFESSIONAL UNIVERSITY</h1>
+                    <p>ESTABLISHED UNDER PUNJAB ACT 25 OF 2005 | UGC RECOGNIZED</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#">Student Portal</a>
+                <a href="#">Placement Cell</a>
+                <a href="#">Guidelines</a>
+                <a href="#">Helpdesk</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="hero">
+            <div class="badge">📄 Placement & Career Services</div>
+            <h1>Resume / CV Submission Portal</h1>
+            <p>Upload your official document for AI-based processing. Your credentials (email, skills, projects, certifications) will be securely stored in the university database and Google Sheets. No extracted data will be displayed to the student.</p>
+        </div>
+
+        <div class="upload-card">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📑 🖨️</div>
+                <div class="upload-text">Click to browse or drag & drop your file</div>
+                <div class="upload-hint">Support: PDF, DOC, DOCX (Max file size: 5 MB)</div>
+                <input type="file" id="fileInput" accept=".pdf,.doc,.docx" style="display: none;">
+            </div>
+
+            <div class="file-info" id="fileInfo">
+                <span class="file-name" id="fileName"></span>
+                <button class="remove-file" id="removeFileBtn">✖ Remove</button>
+            </div>
+
+            <button class="process-btn" id="processBtn" disabled>📤 Submit to LPU Processing System</button>
+            <div class="privacy-note">
+                <span>🛡️</span> Confidential Processing — Only authorized university systems can view extracted data. Your privacy is our priority.
+            </div>
+        </div>
+
+        <!-- Loading animation -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div style="color: #1e293b; font-weight: 600;">LPU Secure Document Engine is analyzing...</div>
+            <div style="color: #5b6e8c; font-size: 0.8rem; margin-top: 0.5rem;">Extracting relevant credentials & saving to cloud sheet</div>
+        </div>
+
+        <!-- Success message - NO extracted fields visible to student -->
+        <div class="submission-message" id="submissionMessage">
+            <div class="success-icon">✅🎓</div>
+            <h3>Submission Successful!</h3>
+            <p>Your document has been received by the LPU Placement Cell. The extracted information has been securely saved to the university database.</p>
+            <button class="new-submission-btn" id="newSubmissionBtn">➕ Upload Another Document</button>
+        </div>
+
+        <!-- Error / info message area -->
+        <div class="message" id="message"></div>
+        
+        <div class="footer">
+            © 2025 Lovely Professional University | Data processed via Google Apps Script integration | All rights reserved
+        </div>
+    </div>
+
+    <script>
+        // Official Apps Script URL (same endpoint)
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyXSe-AmykriiRza0fTWRQIqEQfyiWcacOROSZ1WhDG-7JUJRy5IqkzDa-vN4Y1OsQl7A/exec';
+        
+        let selectedFile = null;
+
+        // DOM elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileNameSpan = document.getElementById('fileName');
+        const removeFileBtn = document.getElementById('removeFileBtn');
+        const processBtn = document.getElementById('processBtn');
+        const loadingDiv = document.getElementById('loading');
+        const submissionMessageDiv = document.getElementById('submissionMessage');
+        const messageDiv = document.getElementById('message');
+        const newSubmissionBtn = document.getElementById('newSubmissionBtn');
+
+        // Helper: Reset file selection
+        function resetFileSelection() {
+            selectedFile = null;
+            fileInput.value = '';
+            fileInfo.classList.remove('show');
+            processBtn.disabled = true;
+        }
+
+        // Helper: Show temporary messages (error / generic)
+        function showMessage(msg, type) {
+            messageDiv.textContent = msg;
+            messageDiv.className = `message show ${type}`;
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 5000);
+        }
+
+        function hideMessage() {
+            messageDiv.classList.remove('show');
+        }
+
+        // File validation & handler
+        function handleFileSelection(file) {
+            const validExtensions = ['.pdf', '.doc', '.docx'];
+            const fileNameLower = file.name.toLowerCase();
+            const fileExt = fileNameLower.substring(fileNameLower.lastIndexOf('.'));
+            
+            if (!validExtensions.includes(fileExt)) {
+                showMessage('❌ Invalid file format. Please upload PDF, DOC, or DOCX only.', 'error');
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                showMessage('❌ File exceeds 5MB limit. Please compress or upload a smaller file.', 'error');
+                return;
+            }
+
+            selectedFile = file;
+            fileNameSpan.textContent = file.name;
+            fileInfo.classList.add('show');
+            processBtn.disabled = false;
+            hideMessage();
+            submissionMessageDiv.classList.remove('show');
+        }
+
+        // Event listeners for upload
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file) handleFileSelection(file);
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files[0]) handleFileSelection(e.target.files[0]);
+        });
+
+        removeFileBtn.addEventListener('click', () => {
+            resetFileSelection();
+            hideMessage();
+            submissionMessageDiv.classList.remove('show');
+        });
+
+        // Process document submission -> student sees only generic success
+        processBtn.addEventListener('click', async () => {
+            if (!selectedFile) {
+                showMessage('⚠️ No file selected. Please choose a document.', 'error');
+                return;
+            }
+
+            processBtn.disabled = true;
+            loadingDiv.classList.add('show');
+            submissionMessageDiv.classList.remove('show');
+            hideMessage();
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const base64Data = e.target.result.split(',')[1];
+                
+                const formData = new FormData();
+                formData.append('fileData', base64Data);
+                formData.append('fileName', selectedFile.name);
+
+                try {
+                    const response = await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    let result;
+                    const responseText = await response.text();
+                    try {
+                        result = JSON.parse(responseText);
+                    } catch (parseErr) {
+                        console.error('Invalid JSON', responseText);
+                        throw new Error('Server response error.');
+                    }
+                    
+                    loadingDiv.classList.remove('show');
+                    
+                    if (result && result.success === true) {
+                        // ✅ Success: no extracted fields displayed anywhere
+                        submissionMessageDiv.classList.add('show');
+                        resetFileSelection();
+                        submissionMessageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        const errorMsg = (result && result.message) ? result.message : 'Processing failed. Please contact LPU support.';
+                        showMessage('❌ ' + errorMsg, 'error');
+                        processBtn.disabled = false;
+                    }
+                } catch (error) {
+                    loadingDiv.classList.remove('show');
+                    console.error('Submission network error:', error);
+                    showMessage('❌ Network issue: Could not connect to LPU processing server. Please try again.', 'error');
+                    processBtn.disabled = false;
+                }
+            };
+            
+            reader.onerror = () => {
+                loadingDiv.classList.remove('show');
+                showMessage('❌ File reading error. Please try a different file.', 'error');
+                processBtn.disabled = false;
+            };
+            
+            reader.readAsDataURL(selectedFile);
+        });
+
+        // "Submit Another Document" resets everything
+        newSubmissionBtn.addEventListener('click', () => {
+            submissionMessageDiv.classList.remove('show');
+            resetFileSelection();
+            fileInput.value = '';
+            fileInfo.classList.remove('show');
+            processBtn.disabled = true;
+            hideMessage();
+        });
+
+        // On load: ensure no extracted data elements exist in DOM (completely student-friendly)
+        window.addEventListener('load', () => {
+            // Double safety: remove any potential residual result containers that might appear
+            const anyResultBox = document.querySelector('.results, .extracted-data');
+            if (anyResultBox) anyResultBox.remove();
+            submissionMessageDiv.classList.remove('show');
+            loadingDiv.classList.remove('show');
+            hideMessage();
+        });
+    </script>
+</body>
+</html>
